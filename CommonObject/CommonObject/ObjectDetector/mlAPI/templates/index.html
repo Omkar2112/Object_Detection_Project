@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+      <button type="submit">Submit</button>
+      <button type="submit"><a href="{% url 'detect:upload_picture' %}"> Capture </a></button>
+  </form>
+</body>
+</html>

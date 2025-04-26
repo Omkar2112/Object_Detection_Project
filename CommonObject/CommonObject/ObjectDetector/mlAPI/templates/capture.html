@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Image Capture</title>
+</head>
+<body>
+    <h1>Webcam Image Capture</h1>
+    <video id="video" width="400" height="300" autoplay></video>
+    <button id="captureButton">Capture Image and Submit</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('video');
+            var captureButton = document.getElementById('captureButton');
+
+            // Access the webcam stream
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(err) {
+                    console.error('Error accessing webcam:', err);
+                });
+
+            // Capture image and submit
+            captureButton.addEventListener('click', function() {
+                var canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                var context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert the captured image to base64 data URL
+                var imageData = canvas.toDataURL('image/jpeg');
+
+                // Create a hidden form and submit the image
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'http://127.0.0.1:8000/capture/';  // Change this to your server endpoint
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'image';
+                input.value = imageData;
+                input.classList.add('form-control', 'item'); // Add the class 'form-control item' to the input
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            });
+        });
+    </script>
+</body>
+</html>

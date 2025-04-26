@@ -1,0 +1,34 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.body-bg{
+	background-color: #f8f8ff;
+}
+
+.nav-bg{
+    background-color: #12044E;
+}
+
+.nav-text-color{
+	color: #9EFAC3;
+}
+
+.nav-brand-size{
+	font-size: 2rem;
+}
+
+
+.text-underline{
+	position:relative;
+	height: 0.5rem;
+	width:50%;
+	margin: 0 auto;
+	border-radius:1rem;
+	color: black;
+}
+
+.add-item{
+   font-size: 40px;
+   font-color: black;
+}
+
